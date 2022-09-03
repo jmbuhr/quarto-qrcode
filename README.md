@@ -13,7 +13,7 @@ If you're using version control, you will want to check in this directory.
 
 ## Using
 
-`{{{< qrcode https://jmbuhr.de >}}}`
+`{{< qrcode https://jmbuhr.de >}}`
 
 More examples: <https://jmbuhr.de/quarto-qrcode>
 
