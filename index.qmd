@@ -1,6 +1,11 @@
 ---
 title: Quarto-qrcode example
-format: html
+format:
+  html: default
+  pdf:
+    include-in-header:
+      text: |
+        \usepackage[]{qrcode}
 ---
 
 Examples for <https://github.com/jmbuhr/quarto-qrcode>
@@ -9,6 +14,8 @@ Examples for <https://github.com/jmbuhr/quarto-qrcode>
 
 `{{{< qrcode https://jmbuhr.de >}}}`
 {{< qrcode https://jmbuhr.de >}}
+
+\qrcode[]{https://jmbuhr.de}
 
 Supply an ID as the second argument (here `qr1` and `qr2`) if you have more than one qrcode to keep them separate.
 Use keyword arguments to change the style of the qrcode ([available options](https://davidshimjs.github.io/qrcodejs/)).
