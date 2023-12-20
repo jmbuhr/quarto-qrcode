@@ -1,5 +1,5 @@
 -- for development:
-local p = quarto.utils.dump
+local p = quarto.log.warning
 
 ---Format string like in bash or python,
 ---e.g. f('Hello ${one}', {one = 'world'})
@@ -18,6 +18,12 @@ local function addDependencies()
     scripts = { './assets/qrcode.js' },
   }
 end
+
+---Add qrcode js dependencies.
+local function addDependenciesTex()
+  quarto.doc.include_text("in-header", "\\usepackage[]{qrcode}")
+end
+
 
 ---Merge user provided options with defaults
 ---@param userOptions table
@@ -44,35 +50,70 @@ local function mergeOptions(url, userOptions)
   return quarto.json.encode(defaultOptions)
 end
 
+
 ---@return string
 local function wrapInlineDiv(options)
   return [[
 <div id="${id}" class="qrcode"></div>
 <script type="text/javascript">
 var qrcode = new QRCode("${id}", ]]
-    .. options..[[);
+      .. options .. [[);
 </script>
+    ]]
+end
+
+---@return string
+local function wrapInlineTex(url, opts)
+  return [[
+\qrcode[]] .. opts .. [[]{]] .. url .. [[}
     ]]
 end
 
 return {
   ['qrcode'] = function(args, kwargs, _)
-    if not quarto.doc.isFormat("html:js") then
-      return pandoc.Null()
+    if quarto.doc.is_format("html:js") then
+      addDependencies()
+      local url = pandoc.utils.stringify(args[1])
+      local id = 'qrcode'
+      local maybeId = args[2]
+      if maybeId ~= nil then
+        id = pandoc.utils.stringify(maybeId)
+      end
+      local options = mergeOptions(url, kwargs)
+      local text = wrapInlineDiv(options)
+      return pandoc.RawBlock(
+        'html',
+        f(text, { id = id })
+      )
+    elseif quarto.doc.is_format("pdf") then
+      addDependenciesTex()
+      local url = pandoc.utils.stringify(args[1])
+      local id = 'qrcode'
+      local maybeId = args[2]
+      if maybeId ~= nil then
+        id = pandoc.utils.stringify(maybeId)
+      end
+      local opts = ""
+      for k, v in pairs(kwargs) do
+        if string.match(k, "^pdf") then
+          k = string.sub(k, 4)
+          opts = opts .. k .. "=" .. v .. ", "
+        end
+      end
+      for _, v in ipairs(args) do
+        if string.match(v, "^pdf") then
+          v = string.sub(v, 4)
+          opts = opts .. v .. ", "
+        end
+      end
+      if string.len(opts) then
+        opts = string.sub(opts, 1, string.len(opts) - 2)
+      end
+      local text = wrapInlineTex(url, opts)
+      return pandoc.RawBlock(
+        'tex',
+        f(text, { id = id })
+      )
     end
-    addDependencies()
-    local url = pandoc.utils.stringify(args[1])
-    local id = 'qrcode'
-    local maybeId = args[2]
-    if maybeId ~= nil then
-      id = pandoc.utils.stringify(maybeId)
-    end
-    local options =mergeOptions(url, kwargs)
-    local text = wrapInlineDiv(options)
-    return pandoc.RawBlock(
-      'html',
-      f(text, {id=id})
-    )
   end,
 }
-

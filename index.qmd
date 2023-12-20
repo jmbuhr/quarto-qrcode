@@ -1,21 +1,18 @@
 ---
 title: Quarto-qrcode example
 format:
+  pdf: default
   html: default
-  pdf:
-    include-in-header:
-      text: |
-        \usepackage[]{qrcode}
 ---
 
 Examples for <https://github.com/jmbuhr/quarto-qrcode>
 
 # Usage
 
+## HTML
+
 `{{{< qrcode https://jmbuhr.de >}}}`
 {{< qrcode https://jmbuhr.de >}}
-
-\qrcode[]{https://jmbuhr.de}
 
 Supply an ID as the second argument (here `qr1` and `qr2`) if you have more than one qrcode to keep them separate.
 Use keyword arguments to change the style of the qrcode ([available options](https://davidshimjs.github.io/qrcodejs/)).
@@ -41,4 +38,15 @@ Style your qrcodes with the `qrcode` css class on the surrounding div.
   margin-bottom: 1rem;
 }
 </style>
+
+## PDF
+
+For options specific to pdf output such as the height of the qrcode in a unit that tex can understand,
+append `pdf` to the name of the option to be passed to the [qrcode CTAN package]().
+
+`{{{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfheigth=4cm >}}}`
+{{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfheight=4cm >}}
+
+`{{{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfdraft >}}}`
+{{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfnolink >}}
 
