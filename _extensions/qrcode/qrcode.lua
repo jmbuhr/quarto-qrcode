@@ -88,11 +88,6 @@ return {
     elseif quarto.doc.is_format("pdf") then
       addDependenciesTex()
       local url = pandoc.utils.stringify(args[1])
-      local id = 'qrcode'
-      local maybeId = args[2]
-      if maybeId ~= nil then
-        id = pandoc.utils.stringify(maybeId)
-      end
       local opts = ""
       for k, v in pairs(kwargs) do
         if string.match(k, "^pdf") then
@@ -112,7 +107,7 @@ return {
       local text = wrapInlineTex(url, opts)
       return pandoc.RawBlock(
         'tex',
-        f(text, { id = id })
+        text
       )
     end
   end,

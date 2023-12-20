@@ -1,8 +1,8 @@
 ---
 title: Quarto-qrcode example
 format:
-  pdf: default
   html: default
+  pdf: default
 ---
 
 Examples for <https://github.com/jmbuhr/quarto-qrcode>
@@ -47,6 +47,6 @@ append `pdf` to the name of the option to be passed to the [qrcode CTAN package]
 `{{{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfheigth=4cm >}}}`
 {{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfheight=4cm >}}
 
-`{{{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfdraft >}}}`
+`{{{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfnolink >}}}`
 {{< qrcode https://jmbuhr.de qr1 width=100 height=100 pdfnolink >}}
 

@@ -72,10 +72,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -100,23 +101,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Examples for <a href="https://github.com/jmbuhr/quarto-qrcode" class="uri">https://github.com/jmbuhr/quarto-qrcode</a></p>
 <section id="usage" class="level1">
 <h1>Usage</h1>
+<section id="html" class="level2">
+<h2 class="anchored" data-anchor-id="html">HTML</h2>
 <p><code>{{&lt; qrcode https://jmbuhr.de &gt;}}</code></p>
 <div id="qrcode" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qrcode", {"text":"https://jmbuhr.de","colorLight":"#ffffff","colorDark":"#000000","height":128,"width":128});
+var qrcode = new QRCode("qrcode", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":128,"colorDark":"#000000","height":128});
 </script>
     
 <p>Supply an ID as the second argument (here <code>qr1</code> and <code>qr2</code>) if you have more than one qrcode to keep them separate. Use keyword arguments to change the style of the qrcode (<a href="https://davidshimjs.github.io/qrcodejs/">available options</a>).</p>
 <p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 colorDark='#0011bb' &gt;}}</code></p>
 <div id="qr1" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr1", {"text":"https://jmbuhr.de","colorLight":"#ffffff","colorDark":"#0011bb","height":"100","width":"100"});
+var qrcode = new QRCode("qr1", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":"100","colorDark":"#0011bb","height":"100"});
 </script>
     
 <p><code>{{&lt; qrcode https://jmbuhr.de qr2 width=100 height=100 colorDark='#0011bb' &gt;}}</code></p>
 <div id="qr2" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr2", {"text":"https://jmbuhr.de","colorLight":"#ffffff","colorDark":"#0011bb","height":"100","width":"100"});
+var qrcode = new QRCode("qr2", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":"100","colorDark":"#0011bb","height":"100"});
 </script>
     
 <p>Style your qrcodes with the <code>qrcode</code> css class on the surrounding div.</p>
@@ -130,6 +133,23 @@ var qrcode = new QRCode("qr2", {"text":"https://jmbuhr.de","colorLight":"#ffffff
   margin-bottom: 1rem;
 }
 </style>
+</section>
+<section id="pdf" class="level2">
+<h2 class="anchored" data-anchor-id="pdf">PDF</h2>
+<p>For options specific to pdf output such as the height of the qrcode in a unit that tex can understand, append <code>pdf</code> to the name of the option to be passed to the <a href="">qrcode CTAN package</a>.</p>
+<p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 pdfheigth=4cm &gt;}}</code></p>
+<div id="qr1" class="qrcode"></div>
+<script type="text/javascript">
+var qrcode = new QRCode("qr1", {"colorLight":"#ffffff","pdfheight":"4cm","text":"https://jmbuhr.de","width":"100","colorDark":"#000000","height":"100"});
+</script>
+    
+<p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 pdfnolink &gt;}}</code></p>
+<div id="qr1" class="qrcode"></div>
+<script type="text/javascript">
+var qrcode = new QRCode("qr1", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":"100","colorDark":"#000000","height":"100"});
+</script>
+    
+</section>
 </section>
 
 </main>
