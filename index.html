@@ -106,20 +106,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>{{&lt; qrcode https://jmbuhr.de &gt;}}</code></p>
 <div id="qrcode" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qrcode", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":128,"colorDark":"#000000","height":128});
+var qrcode = new QRCode("qrcode", {"text":"https://jmbuhr.de","height":128,"width":128,"colorDark":"#000000","colorLight":"#ffffff"});
 </script>
     
 <p>Supply an ID as the second argument (here <code>qr1</code> and <code>qr2</code>) if you have more than one qrcode to keep them separate. Use keyword arguments to change the style of the qrcode (<a href="https://davidshimjs.github.io/qrcodejs/">available options</a>).</p>
 <p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 colorDark='#0011bb' &gt;}}</code></p>
 <div id="qr1" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr1", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":"100","colorDark":"#0011bb","height":"100"});
+var qrcode = new QRCode("qr1", {"text":"https://jmbuhr.de","height":"100","width":"100","colorDark":"#0011bb","colorLight":"#ffffff"});
 </script>
     
 <p><code>{{&lt; qrcode https://jmbuhr.de qr2 width=100 height=100 colorDark='#0011bb' &gt;}}</code></p>
 <div id="qr2" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr2", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":"100","colorDark":"#0011bb","height":"100"});
+var qrcode = new QRCode("qr2", {"text":"https://jmbuhr.de","height":"100","width":"100","colorDark":"#0011bb","colorLight":"#ffffff"});
 </script>
     
 <p>Style your qrcodes with the <code>qrcode</code> css class on the surrounding div.</p>
@@ -140,13 +140,13 @@ var qrcode = new QRCode("qr2", {"colorLight":"#ffffff","text":"https://jmbuhr.de
 <p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 pdfheigth=4cm &gt;}}</code></p>
 <div id="qr1" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr1", {"colorLight":"#ffffff","pdfheight":"4cm","text":"https://jmbuhr.de","width":"100","colorDark":"#000000","height":"100"});
+var qrcode = new QRCode("qr1", {"text":"https://jmbuhr.de","height":"100","width":"100","pdfheight":"4cm","colorDark":"#000000","colorLight":"#ffffff"});
 </script>
     
 <p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 pdfnolink &gt;}}</code></p>
 <div id="qr1" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr1", {"colorLight":"#ffffff","text":"https://jmbuhr.de","width":"100","colorDark":"#000000","height":"100"});
+var qrcode = new QRCode("qr1", {"text":"https://jmbuhr.de","height":"100","width":"100","colorDark":"#000000","colorLight":"#ffffff"});
 </script>
     
 </section>

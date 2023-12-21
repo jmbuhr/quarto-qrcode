@@ -10,20 +10,6 @@ local function f(s, kwargs)
   return (s:gsub('($%b{})', function(w) return kwargs[w:sub(3, -2)] or w end))
 end
 
----Add qrcode js dependencies.
-local function addDependencies()
-  quarto.doc.addHtmlDependency {
-    name = 'qrcodejs',
-    version = 'v1.0.0',
-    scripts = { './assets/qrcode.js' },
-  }
-end
-
----Add qrcode js dependencies.
-local function addDependenciesTex()
-  quarto.doc.include_text("in-header", "\\usepackage[]{qrcode}")
-end
-
 
 ---Merge user provided options with defaults
 ---@param userOptions table
@@ -72,7 +58,11 @@ end
 return {
   ['qrcode'] = function(args, kwargs, _)
     if quarto.doc.is_format("html:js") then
-      addDependencies()
+      quarto.doc.add_html_dependency {
+        name = 'qrcodejs',
+        version = 'v1.0.0',
+        scripts = { './assets/qrcode.js' },
+      }
       local url = pandoc.utils.stringify(args[1])
       local id = 'qrcode'
       local maybeId = args[2]
@@ -86,7 +76,7 @@ return {
         f(text, { id = id })
       )
     elseif quarto.doc.is_format("pdf") then
-      addDependenciesTex()
+      quarto.doc.use_latex_package("qrcode")
       local url = pandoc.utils.stringify(args[1])
       local opts = ""
       for k, v in pairs(kwargs) do
