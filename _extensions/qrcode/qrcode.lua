@@ -42,8 +42,12 @@ local function wrapInlineDiv(options)
   return [[
 <div id="${id}" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("${id}", ]]
-      .. options .. [[);
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, ]] .. options .. [[);
+  script.remove();
+})();
 </script>
     ]]
 end
@@ -64,10 +68,9 @@ return {
         scripts = { './assets/qrcode.js' },
       }
       local url = pandoc.utils.stringify(args[1])
-      local id = 'qrcode'
-      local maybeId = args[2]
-      if maybeId ~= nil then
-        id = pandoc.utils.stringify(maybeId)
+      local id = ""
+      if args[2] ~= nil then
+        id = f('id="${id}" ', { id = pandoc.utils.stringify(id) })
       end
       local options = mergeOptions(url, kwargs)
       local text = wrapInlineDiv(options)
