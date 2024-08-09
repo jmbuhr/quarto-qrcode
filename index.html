@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.513">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -104,28 +104,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="html" class="level2">
 <h2 class="anchored" data-anchor-id="html">HTML</h2>
 <p><code>{{&lt; qrcode https://jmbuhr.de &gt;}}</code></p>
-<div id="qrcode" class="qrcode"></div>
+<div id="" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qrcode", {"text":"https://jmbuhr.de","height":128,"width":128,"colorDark":"#000000","colorLight":"#ffffff"});
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorLight":"#ffffff","width":128,"colorDark":"#000000","height":128,"text":"https://jmbuhr.de"});
+  script.remove();
+})();
 </script>
     
-<p>Supply an ID as the second argument (here <code>qr1</code> and <code>qr2</code>) if you have more than one qrcode to keep them separate. Use keyword arguments to change the style of the qrcode (<a href="https://davidshimjs.github.io/qrcodejs/">available options</a>).</p>
-<p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 colorDark='#0011bb' &gt;}}</code></p>
-<div id="qr1" class="qrcode"></div>
+<p><code>{{&lt; qrcode https://quarto.org &gt;}}</code></p>
+<div id="" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr1", {"text":"https://jmbuhr.de","height":"100","width":"100","colorDark":"#0011bb","colorLight":"#ffffff"});
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorLight":"#ffffff","width":128,"colorDark":"#000000","height":128,"text":"https://quarto.org"});
+  script.remove();
+})();
+</script>
+    
+<p>You can supply an ID as the second argument (<code>qr1</code> and <code>qr2</code> in the next two examples), but it’s not required. Use keyword arguments to change the style of the qrcode (<a href="https://davidshimjs.github.io/qrcodejs/">available options</a>).</p>
+<p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 colorDark='#0011bb' &gt;}}</code></p>
+<div id="id=" "="" class="qrcode"></div>
+<script type="text/javascript">
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorLight":"#ffffff","width":"100","colorDark":"#0011bb","height":"100","text":"https://jmbuhr.de"});
+  script.remove();
+})();
 </script>
     
 <p><code>{{&lt; qrcode https://jmbuhr.de qr2 width=100 height=100 colorDark='#0011bb' &gt;}}</code></p>
-<div id="qr2" class="qrcode"></div>
+<div id="id=" "="" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr2", {"text":"https://jmbuhr.de","height":"100","width":"100","colorDark":"#0011bb","colorLight":"#ffffff"});
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorLight":"#ffffff","width":"100","colorDark":"#0011bb","height":"100","text":"https://jmbuhr.de"});
+  script.remove();
+})();
 </script>
     
 <p>Style your qrcodes with the <code>qrcode</code> css class on the surrounding div.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">style</span><span class="dt">&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">.qrcode</span> {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-bottom</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-bottom</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">style</span><span class="dt">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <style>
@@ -138,15 +164,25 @@ var qrcode = new QRCode("qr2", {"text":"https://jmbuhr.de","height":"100","width
 <h2 class="anchored" data-anchor-id="pdf">PDF</h2>
 <p>For options specific to pdf output such as the height of the qrcode in a unit that tex can understand, append <code>pdf</code> to the name of the option to be passed to the <a href="">qrcode CTAN package</a>.</p>
 <p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 pdfheigth=4cm &gt;}}</code></p>
-<div id="qr1" class="qrcode"></div>
+<div id="id=" "="" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr1", {"text":"https://jmbuhr.de","height":"100","width":"100","pdfheight":"4cm","colorDark":"#000000","colorLight":"#ffffff"});
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorLight":"#ffffff","width":"100","pdfheight":"4cm","colorDark":"#000000","height":"100","text":"https://jmbuhr.de"});
+  script.remove();
+})();
 </script>
     
 <p><code>{{&lt; qrcode https://jmbuhr.de qr1 width=100 height=100 pdfnolink &gt;}}</code></p>
-<div id="qr1" class="qrcode"></div>
+<div id="id=" "="" class="qrcode"></div>
 <script type="text/javascript">
-var qrcode = new QRCode("qr1", {"text":"https://jmbuhr.de","height":"100","width":"100","colorDark":"#000000","colorLight":"#ffffff"});
+(function() {
+  var script = document.currentScript;
+  var qrcode = script.previousElementSibling;
+  qrcode.qrcode = new QRCode(qrcode, {"colorLight":"#ffffff","width":"100","colorDark":"#000000","height":"100","text":"https://jmbuhr.de"});
+  script.remove();
+})();
 </script>
     
 </section>
@@ -189,18 +225,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -232,7 +257,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -267,7 +332,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -282,27 +351,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -317,10 +365,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -329,8 +381,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
